@@ -1,0 +1,183 @@
+/* * {
+  box-sizing: border-box;
+} */
+
+*::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  html,
+  body,
+  #app-root {
+    color: rgb(36, 36, 36);
+    height: 100%;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  hr {
+    background: darkgray;
+    height: 2px;
+    border-radius: 2px;
+  }
+
+  main {
+    margin: 20px;
+    position: relative;
+    top: 60px;
+  }
+  
+  
+  #main-content {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  #title-div{
+    margin: unset;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  #action-btn{
+    margin-top: 3px;
+    margin-right: 50px;
+  }
+
+  #action-btn button:nth-of-type(1) {
+    margin-right: 25px;
+  }
+
+  .product {
+      margin: 15px;
+  }
+
+  .prod-info {
+      margin-top: -5px;
+  }
+
+  .prod-info p {
+      margin: unset;
+      text-align: center;
+      font-weight: 500;
+  }
+
+  #header {
+    background-color: aliceblue;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    max-height: 85px;
+    padding: 25px 10px 20px 20px;
+  }
+
+  #header hr::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .input > input, .input > select  {
+    height: 40px;
+  }
+
+  .form-input-group {
+    width: 55%;
+    font-weight: 600;
+  }
+
+  .err {
+    border-color: #dc3545 !important;
+    outline: #dc3545 solid 1.5px;
+  }
+
+  .err-text {
+    color: #dc3545;
+  }
+
+  .hide {
+    display: none !important;
+  }
+
+  .success-text {
+    color: #28a745;
+  }
+
+  #notification {
+    text-align: center;
+  }
+
+@media only screen and (max-width: 539px) {
+    #title-div{
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      #title-div h2{
+        text-align: center;
+      }
+
+      #header {
+        max-height: 130px;
+      }
+
+      #action-btn{
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #main-content {
+        margin-top: 95px;
+    }
+}
+
+@media only screen and (min-width: 539px) {
+  #main-content {
+    margin-top: 50px;
+  }
+}
+
+
+@media only screen and (max-width: 930px) {
+  .form-input-group {
+    width: 90%;
+    font-weight: 600;
+  }
+}
+  
+@media only screen and (min-width: 1024px) {
+    body {
+      overflow-x: hidden;
+    }
+
+    #main-content {
+      margin-top: 110px;
+  }
+  
+    main {
+      position: unset;
+      margin: unset;
+      margin: 20px 30px 10px 30px;
+      max-height: 100%;
+    }
+}
+  
