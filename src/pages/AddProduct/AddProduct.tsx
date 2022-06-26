@@ -51,7 +51,7 @@ export const AddProduct = () => {
       .method('post')
       .queryParams(undefined)
       .headers({
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
       })
       .data(state)
       .build()
@@ -138,7 +138,7 @@ export const AddProduct = () => {
         <hr/>
       </header>
       <main id="main-content">
-        <form id="product-form" action="">
+        <form id="product_form" action="">
           <div className="container-fluid">
             <div className="flex-column form-input-group">
               {!response && <Notification text={`❌ Error! Unable to add new product with SKU '${sku}'.`} type='err' />}

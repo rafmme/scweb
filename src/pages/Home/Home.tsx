@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { ProductCard } from '../../components';
+import { Modal, ProductCard, ProductForm } from '../../components';
 import HTTPRequestBuilder from "../../utils/HTTPRequest/HTTPRequestBuilder";
 
 export const Home = () => {
@@ -8,10 +8,14 @@ export const Home = () => {
     results: [],
     executeDeletion: false,
     listOfProductsForDeletion: [],
+    showModal: false,
   }
   const history = useHistory();
   const [state, setState] = useState(initialState);
-  const { executeDeletion, results, listOfProductsForDeletion } = state;
+  const {
+    executeDeletion, results,
+    listOfProductsForDeletion, showModal
+  } = state;
 
   useEffect(() => {
     let call = true;
@@ -49,9 +53,8 @@ export const Home = () => {
     }
   }, [executeDeletion]);
 
-  const visitAddProductPage = (evt) => {
-    evt.preventDefault();
-    history.push('/add-product');
+  const toggleModalVisibility = () => {
+    setState({ ...state, showModal: !showModal });
   };
 
   const onChecked = (e, sku) => {
@@ -94,7 +97,7 @@ export const Home = () => {
         <div id="title-div">
           <h2>Product List</h2>
           <div id="action-btn" className="flex-column">
-              <button className="btn btn-outline-success" onClick={visitAddProductPage}>ADD</button>
+              <button className="btn btn-outline-success" onClick={toggleModalVisibility}>ADD</button>
               <button className="btn btn-outline-danger" onClick={handleMassDeletion}>MASS DELETE</button>
           </div>
         </div>
@@ -122,6 +125,9 @@ export const Home = () => {
             </div>
           </div>
         </section>
+        <Modal showModal={showModal} toggleModalVisibility={toggleModalVisibility}>
+          <ProductForm />
+        </Modal>
       </main>
     </>
   );

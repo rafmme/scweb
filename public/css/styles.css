@@ -126,6 +126,17 @@
     text-align: center;
   }
 
+  .show-modal {
+    display: block !important;
+    color: #000;
+    background-color: rgb(40, 53, 59);
+    background-color: rgba(40, 53, 59, 0.98);
+  }
+
+  .modal-body > hr {
+    margin-bottom: 10px;
+  }
+
 @media only screen and (max-width: 539px) {
     #title-div{
         flex-direction: column;
