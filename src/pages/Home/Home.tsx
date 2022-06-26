@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Modal, ProductCard, ProductForm } from '../../components';
+import { ProductCard } from "../../components";
 import HTTPRequestBuilder from "../../utils/HTTPRequest/HTTPRequestBuilder";
 
 export const Home = () => {
@@ -8,13 +8,12 @@ export const Home = () => {
     results: [],
     executeDeletion: false,
     listOfProductsForDeletion: [],
-    showModal: false,
   }
   const history = useHistory();
   const [state, setState] = useState(initialState);
   const {
     executeDeletion, results,
-    listOfProductsForDeletion, showModal
+    listOfProductsForDeletion,
   } = state;
 
   useEffect(() => {
@@ -33,17 +32,18 @@ export const Home = () => {
 
       setState({
         ...state,
-        executeDeletion: method.toLowerCase() === 'get' ? false : executeDeletion,
-        listOfProductsForDeletion: method.toLowerCase() === 'get' ? [] : listOfProductsForDeletion,
         results: method.toLowerCase() === 'get' ? response?.products || results : results,
       });
     };
 
     if (executeDeletion && listOfProductsForDeletion.length > 0) {
-      listOfProductsForDeletion.forEach(sku => {
-        executeHttpRequest(`${apiUrl}/products/${sku}`, 'DELETE');
+      listOfProductsForDeletion.forEach((sku, i) => {
+        executeHttpRequest(`${apiUrl}/products/${sku.toUpperCase()}`, 'DELETE');
+
+        if ((i + 1) === listOfProductsForDeletion.length) {
+          history.go(0);
+        }
       });
-      history.go(0);
     }
 
     executeHttpRequest(`${apiUrl}/products`, 'GET');
@@ -53,11 +53,10 @@ export const Home = () => {
     }
   }, [executeDeletion]);
 
-  const toggleModalVisibility = (e) => {
+  const visitProductPage = (e) => {
     e.preventDefault();
     history.push('/add-product');
     return;
-    // setState({ ...state, showModal: !showModal });
   };
 
   const onChecked = (e, sku) => {
@@ -100,7 +99,7 @@ export const Home = () => {
         <div id="title-div">
           <h2>Product List</h2>
           <div id="action-btn" className="flex-column">
-              <button className="btn btn-outline-success" onClick={toggleModalVisibility}>ADD</button>
+              <button className="btn btn-outline-success" onClick={visitProductPage}>ADD</button>
               <button className="btn btn-outline-danger" onClick={handleMassDeletion}>MASS DELETE</button>
           </div>
         </div>
@@ -128,9 +127,6 @@ export const Home = () => {
             </div>
           </div>
         </section>
-        <Modal showModal={showModal} toggleModalVisibility={toggleModalVisibility}>
-          <ProductForm />
-        </Modal>
       </main>
     </>
   );
