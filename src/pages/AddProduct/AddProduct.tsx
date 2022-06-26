@@ -16,19 +16,17 @@ export const AddProduct = () => {
     length: undefined,
     size: undefined,
     weight: undefined,
-    hasResponseError: false,
     inputError: [],
     response: {
       error: '',
       errors: {},
-      message: '',
+      message: undefined,
     },
     save: false,
   }
   const [state, setState] = useState(initialState);
   const {
     productType,
-    hasResponseError,
     inputError,
     save,
     sku,
@@ -60,7 +58,6 @@ export const AddProduct = () => {
       setState({
         ...state,
         save: false,
-        hasResponseError: result?.error || result?.errors,
         response: result,
       });
     };
@@ -85,7 +82,6 @@ export const AddProduct = () => {
       ...state,
       [e.target.id]: e.target.value,
       inputError: [],
-      hasResponseError: false,
       save: false,
       response: {
         error: '',
@@ -103,7 +99,6 @@ export const AddProduct = () => {
       setState({
         ...state,
         inputError: errors,
-        hasResponseError: false,
         save: false,
         response: {
           error: '',
@@ -142,7 +137,7 @@ export const AddProduct = () => {
           <div className="container-fluid">
             <div className="flex-column form-input-group">
               {!response && <Notification text={`❌ Error! Unable to add new product with SKU '${sku}'.`} type='err' />}
-              {(!hasResponseError && (response?.message && response?.message !== '')) && <Notification text={`✅ ${response?.message}`} type='success' />}
+              {(response?.message) && <Notification text={`✅ ${response?.message}`} type='success' />}
               <div className="input form-group">
                 <label htmlFor="sku">SKU </label>
                 <div>

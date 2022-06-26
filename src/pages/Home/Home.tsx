@@ -53,8 +53,11 @@ export const Home = () => {
     }
   }, [executeDeletion]);
 
-  const toggleModalVisibility = () => {
-    setState({ ...state, showModal: !showModal });
+  const toggleModalVisibility = (e) => {
+    e.preventDefault();
+    history.push('/add-product');
+    return;
+    // setState({ ...state, showModal: !showModal });
   };
 
   const onChecked = (e, sku) => {
